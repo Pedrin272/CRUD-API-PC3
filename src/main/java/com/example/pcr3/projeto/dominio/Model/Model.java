@@ -20,7 +20,7 @@ public abstract class Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     private Boolean ativo;
     private LocalDateTime createdAt;

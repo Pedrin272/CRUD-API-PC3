@@ -6,6 +6,11 @@ import org.springframework.lang.NonNull;
 
 import com.example.pcr3.projeto.dominio.Usuario.UsuarioModel;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TransacaoDTO {
     private Boolean ativo;
     private LocalDateTime createdAt;
@@ -21,7 +26,7 @@ public class TransacaoDTO {
 
     private String descricao;
 
-    @NonNull
+    @lombok.NonNull
     private UsuarioModel usuario;
 
 }

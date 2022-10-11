@@ -1,14 +1,19 @@
 package com.example.pcr3.projeto.dominio.transacao;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.example.pcr3.projeto.dominio.Usuario.UsuarioModel;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -33,4 +38,7 @@ public class TransacaoModel {
     private Double saldo;
 
     private String descricao;
+
+    @lombok.NonNull
+    private UsuarioModel usuario;
 }
