@@ -2,6 +2,12 @@ package com.example.pcr3.projeto.dominio.produtos;
 
 import com.example.pcr3.projeto.dominio.transacao.TransacaoModel;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +23,18 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoRepository.findAll());
     }
 
+    @GetMapping("/paginado")
+    public ResponseEntity<Page<ProdutoModel>> list(
+            @RequestParam Optional<Sort> sort,
+            @RequestParam Optional<Integer> size,
+            @RequestParam Optional<Integer> page) {
+        PageRequest pageable = PageRequest.of(page.orElse(0), size.orElse(10), sort.orElse(Sort.unsorted()));
+        return ResponseEntity.ok(produtoRepository
+                .findAll(pageable));
+    }
+
     @PostMapping
-    public ResponseEntity<ProdutoModel> save( @RequestBody ProdutoModel produtoModel) {
+    public ResponseEntity<ProdutoModel> save(@RequestBody ProdutoModel produtoModel) {
         return ResponseEntity.ok(produtoRepository.save(produtoModel));
     }
 
@@ -27,7 +43,7 @@ public class ProdutoController {
         if (produtoRepository.existsById(id)) {
             produtoRepository.deleteById(id);
             return ResponseEntity.ok().build();
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

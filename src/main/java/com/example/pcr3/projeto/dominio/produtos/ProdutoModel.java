@@ -5,7 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 
 @Getter
@@ -27,4 +34,9 @@ public class ProdutoModel {
     @JsonProperty("estoque")
     @Column(name = "estoque", nullable = false)
     private Double estoque;
+
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+    @UpdateTimestamp
+    private LocalDateTime updatedDate;
 }
